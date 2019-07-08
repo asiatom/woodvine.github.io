@@ -1,0 +1,47 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="Generator" content="EditPlus®">
+    <meta name="Author" content="">
+    <meta name="Keywords" content="">
+    <meta name="Description" content="">
+    <title>展示汉字笔画的小页面</title>
+    <script src="js/hanzi-writer.min.js"></script>
+
+    <script type="text/javascript">
+        function show() {
+            var x = document.getElementById("name");
+            console.log("current show value is:" + x.value);
+            var writer = HanziWriter.create('grid-background-target', x.value, {
+                width: 200,
+                height: 200,
+                padding: 5,
+                showOutline: true
+
+            });
+
+            writer.animateCharacter();
+        }
+    </script>
+</head>
+<body>
+
+<p>文本框内输入一个汉字，并点击“笔画按钮”</p>
+<input type="text" id="name"/>
+<button id="animate-button" onclick="show();">Animate</button>
+<br/>
+<br/>
+<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" id="grid-background-target">
+    <line x1="0" y1="0" x2="200" y2="0" stroke="#DDD"/>
+    <line x1="0" y1="0" x2="0" y2="200" stroke="#DDD"/>
+    <line x1="0" y1="200" x2="200" y2="200" stroke="#DDD"/>
+    <line x1="200" y1="0" x2="200" y2="200" stroke="#DDD"/>
+
+    <line x1="0" y1="100" x2="200" y2="100" stroke="#DDD"/>
+    <line x1="100" y1="0" x2="100" y2="200" stroke="#DDD"/>
+    <line x1="0" y1="0" x2="200" y2="200" stroke="#DDD"/>
+    <line x1="0" y1="200" x2="200" y2="0" stroke="#DDD"/>
+</svg>
+
+</body>
+</html>
