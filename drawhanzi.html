@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+
+    <meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" />
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>汉字笔画绘制工具</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom fonts for this template -->
+    <link href="https://fonts.googleapis.com/css?family=Saira+Extra+Condensed:100,200,300,400,500,600,700,800,900" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i" rel="stylesheet">
+    <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="vendor/devicons/css/devicons.min.css" rel="stylesheet">
+    <link href="vendor/simple-line-icons/css/simple-line-icons.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="css/resume.min.css" rel="stylesheet">
+    <script src="js/hanzi-writer.min.js"></script>
+    <script src="js/jquery-1.11.2.min.js"></script>
+	<script type="text/javascript">
+	    var writer = null;
+		$(document).keydown(function(event){ 
+			if(event.keyCode==13){ 
+			   show();
+			} 
+		}); 
+        function show() {
+            var x = document.getElementById("name");
+            var character = $("#name").val();//x.value;
+			
+			if(character.length>1){
+               character = character.substring(0,1);
+			}
+
+			//判断是否是汉字
+			var re=/[\u4E00-\u9FA5]/;
+			if (!re.test(character)){
+				$("#msg").text("请输入一个汉字！");
+				return false ;
+			}
+
+			$("#msg").text('仅支持一个汉字');
+			//首次渲染，创建汉字
+            if(writer == null ){
+               writer = HanziWriter.create('grid-background-target', character, {
+                width: 200,
+                height: 200,
+                padding: 5,
+                showOutline: true,
+			    radicalColor: '#168F16' // green
+			  });
+			}else{//非首次，则修改汉字内容
+				writer.setCharacter(character);
+			}
+			
+            writer.animateCharacter();
+        }
+
+		function clearInput(){
+			$("#name").val('');
+			$("#msg").text('仅支持一个汉字');
+		}
+    </script>
+  </head>
+  <body>
+	  <div class="my-auto" style="margin-left:10px;margin-top:10px;">
+         <h4 class="" style="margin-top:10px;margin-left:10px;">小作品（回车或点击）</h3>
+		 <input type="text" id="name" style="width:100px;" length="1" placeholder="输入汉字"/>
+		 <button id="animate-button" onclick="show();">笔画</button>
+		 <button id="clear-button" onclick="clearInput();">重置</button>
+		 <br/>
+		 <span id="msg" style="color:red;">仅支持一个汉字</span>
+		 <br/>
+		 <br/>
+		<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" id="grid-background-target" style="margin-top:5px;margin-left:10px;">
+			<line x1="0" y1="0" x2="200" y2="0" stroke="#DDD"/>
+			<line x1="0" y1="0" x2="0" y2="200" stroke="#DDD"/>
+			<line x1="0" y1="200" x2="200" y2="200" stroke="#DDD"/>
+			<line x1="200" y1="0" x2="200" y2="200" stroke="#DDD"/>
+
+			<line x1="0" y1="100" x2="200" y2="100" stroke="#DDD"/>
+			<line x1="100" y1="0" x2="100" y2="200" stroke="#DDD"/>
+			<line x1="0" y1="0" x2="200" y2="200" stroke="#DDD"/>
+			<line x1="0" y1="200" x2="200" y2="0" stroke="#DDD"/>
+		</svg>
+		</div>
+		<p class="mb-0">最近在教家里五岁的小毕同学写字，正在愁笔画弄不准的问题，能找到类似的APP，但是广告超多。</p>
+		<p class="mb-0">今天（2019年5月17日），在阮一峰先生每周分享的素材中看到了一个汉字笔画的项目hanzi-writer。</p>
+		<p class="mb-0">顺便写了一个小应用，以后就可以用它来查汉字笔画啦！</p>
+	    <p class="mb-0">hanzi-writer的地址为：https://chanind.github.io/hanzi-writer/</p>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Plugin JavaScript -->
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for this template -->
+    <script src="js/resume.min.js"></script>
+
+  </body>
+
+</html>
