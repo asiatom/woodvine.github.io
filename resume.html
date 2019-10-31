@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>woodvine的个人简历</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom fonts for this template -->
+    <link href="https://fonts.googleapis.com/css?family=Saira+Extra+Condensed:100,200,300,400,500,600,700,800,900" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i" rel="stylesheet">
+    <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="vendor/devicons/css/devicons.min.css" rel="stylesheet">
+    <link href="vendor/simple-line-icons/css/simple-line-icons.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="css/resume.min.css" rel="stylesheet">
+    <script src="js/hanzi-writer.min.js"></script>
+    <script src="js/jquery-1.11.2.min.js"></script>
+	<script type="text/javascript">
+	    var writer = null;
+		$(document).keydown(function(event){ 
+			if(event.keyCode==13){ 
+			   show();
+			} 
+		}); 
+        function show() {
+            var x = document.getElementById("name");
+            var character = $("#name").val();//x.value;
+			
+			if(character.length>1){
+               character = character.substring(0,1);
+			}
+
+			//判断是否是汉字
+			var re=/[\u4E00-\u9FA5]/;
+			if (!re.test(character)){
+				$("#msg").text("请输入一个汉字！");
+				return false ;
+			}
+
+			$("#msg").text('仅支持一个汉字');
+			//首次渲染，创建汉字
+            if(writer == null ){
+               writer = HanziWriter.create('grid-background-target', character, {
+                width: 200,
+                height: 200,
+                padding: 5,
+                showOutline: true,
+			    radicalColor: '#168F16' // green
+			  });
+			}else{//非首次，则修改汉字内容
+				writer.setCharacter(character);
+			}
+			
+            writer.animateCharacter();
+        }
+
+		function clearInput(){
+			$("#name").val('');
+			$("#msg").text('仅支持一个汉字');
+		}
+    </script>
+  </head>
+
+  <body id="page-top">
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top" id="sideNav">
+      <a class="navbar-brand js-scroll-trigger" href="#page-top">
+        <span class="d-block d-lg-none">Start Bootstrap</span>
+        <span class="d-none d-lg-block">
+          <img class="img-fluid img-profile rounded-circle mx-auto mb-2" src="img/profile.jpg" alt="">
+        </span>
+      </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="#about">基本信息</a>
+          </li>
+		  <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="#myworkshow">作品小样</a>
+          </li>
+		  <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="#skills">个人技能</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="#experience">工作经历</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="#education">项目经历</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="#interests">兴趣爱好</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="#awards">从业感悟</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="container-fluid p-0">
+
+      <section class="resume-section p-3 p-lg-5 d-flex d-column" id="about">
+        <div class="my-auto">
+          <h3 class="mb-5">基本信息</h3>
+		  <div class="">姓    名：  汪玲玲
+          </div>
+		  <div class="">性    别：  女
+    	  </div>
+		  <div class="">出生年月：  1988 年 11 月
+          </div>
+		  <div class="">学    历：  本科
+          </div>
+		  <div class="">毕业院校：  武汉轻工大学（原名：武汉工业学院）
+          </div>
+		  <div class="">毕业时间：  2011 年 6 月
+          </div>
+		  <div class="">专    业：  软件工程
+          </div>
+		  <div class="">求职意向：  Java 高级开发工程师
+          </div>
+		  <div class="">联系方式： 
+            <a href="mailto:woodvine@126.com">woodvine@126.com</a>
+          </div>
+         </div>
+      </section>
+      <section class="resume-section p-3 p-lg-5 d-flex flex-column" id="myworkshow">
+	  <div class="my-auto">
+          <h3 class="mb-5">小作品：汉字笔画展示（回车/按钮）</h3>
+
+		 <input type="text" id="name"  placeholder="输入一个汉字"/>
+		 <button id="animate-button" onclick="show();">笔画</button>
+		 <button id="clear-button" onclick="clearInput();">重置</button>
+		 <br/>
+		 <span id="msg" style="color:red;">仅支持一个汉字</span>
+		 <br/>
+ 		 <br/>
+		<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" id="grid-background-target">
+			<line x1="0" y1="0" x2="200" y2="0" stroke="#DDD"/>
+			<line x1="0" y1="0" x2="0" y2="200" stroke="#DDD"/>
+			<line x1="0" y1="200" x2="200" y2="200" stroke="#DDD"/>
+			<line x1="200" y1="0" x2="200" y2="200" stroke="#DDD"/>
+
+			<line x1="0" y1="100" x2="200" y2="100" stroke="#DDD"/>
+			<line x1="100" y1="0" x2="100" y2="200" stroke="#DDD"/>
+			<line x1="0" y1="0" x2="200" y2="200" stroke="#DDD"/>
+			<line x1="0" y1="200" x2="200" y2="0" stroke="#DDD"/>
+		</svg>
+		</div>
+		<p class="mb-0">最近在教家里五岁的小女儿写字，正在愁笔画弄不准的问题，能找到类似的APP，但是广告超多。</p>
+		<p class="mb-0">今天（2019年5月17日），在阮一峰先生每周分享的素材中看到了一个汉字笔画的项目hanzi-writer。</p>
+		<p class="mb-0">顺便写了一个小应用，以后就可以用它来查汉字笔画啦！</p>
+	    <p class="mb-0">hanzi-writer的地址为：https://chanind.github.io/hanzi-writer/</p>
+	  </section>
+	  <section class="resume-section p-3 p-lg-5 d-flex flex-column" id="skills">
+        <div class="my-auto">
+          <h3 class="mb-5">个人技能</h3>
+
+          <div class="subheading mb-3">编程语言</div>
+          <ul class="fa-ul mb-0">
+            <li class="list-inline-item">
+              <i > Java </i>
+            </li>
+            <li class="list-inline-item">
+              <i > JavaScript</i>
+            </li>
+            <li class="list-inline-item">
+              <i > AngularJS</i>
+            </li>
+            <li class="list-inline-item">
+              <i > Python </i>
+            </li>
+           </ul>
+
+          <div class="subheading mb-3" style="margin-top:10px"	>技能</div>
+          <ul class="fa-ul mb-0">
+            <li>
+              <i class="fa-li fa fa-check"></i>
+               	7 年 Java 项目开发工作经验，具备良好的编码习惯和较强的逻辑思维能力；</li>
+            <li>
+			<li>
+              <i class="fa-li fa fa-check"></i>
+               	</li>
+            <li>
+              <i class="fa-li fa fa-check"></i>
+               	通过国家CET-4,CET-6考试，具有较强的书面书写能力，能够熟练阅读英文资；
+			</li>
+            <li>
+              <i class="fa-li fa fa-check"></i>
+               	获得“信息系统项目管理师”（软考高级）证书，具有两年项目管理经验；
+			</li>
+            <li>
+              <i class="fa-li fa fa-check"></i>
+               	擅长服务器端开发及Java并发编程；
+			</li>
+			<li>
+             <i class="fa-li fa fa-check"></i>
+               	 能熟练运用Java web主流开发技术框架，熟悉其原理；
+			</li>
+			<li>
+             <i class="fa-li fa fa-check"></i>
+               	  熟悉Redis、MySQL数据库、SequoiaDB数据库、RocketMQ中间件的用法；
+			</li>
+			<li>
+             <i class="fa-li fa fa-check"></i>
+               	  熟悉Linux常用命令，能编写Shell脚本实现自动化的部署逻辑；
+			</li>
+			<li>
+             <i class="fa-li fa fa-check"></i>
+            	  深入研究过Tomcat源码，熟知数据结构及算法设计思想、常用设计模式。
+			</li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="resume-section p-3 p-lg-5 d-flex flex-column" id="experience">
+        <div class="my-auto">
+          <h3 class="mb-5">工作经历</h3>
+
+          <div class="resume-item d-flex flex-column flex-md-row mb-5">
+            <div class="resume-content mr-auto">
+              
+			  <div class="subheading mb-3">北京神州泰岳软件股份有限公司</div>
+              <p>任职Java软件开发工程师，在职两年时间内，作为项目组长，独立负责一款名为“流量探针系统”的产品的落地，项目管理的能力得到锻炼。
+此外，先后参加2017年5月、11月的软考，一次通过考试，并获取“信息系统项目管理工程师”、“系统集成项目管理师”两个证书。
+			</p>
+            </div>
+            <div class="resume-date text-md-right">
+              <span class="text-primary">2016年4月至今</span>
+            </div>
+          </div>
+
+          <div class="resume-item d-flex flex-column flex-md-row mb-5">
+            <div class="resume-content mr-auto">
+              <div class="subheading mb-3">北京博汇科技股份有限公司</div>
+              
+              <p>博汇科技是一家为广电领域提供信号监测、控制和管理等服务的单位，任职该公司Java软件开发工程师。在职两年时间内，我参与的工作有基于Java爬虫的项目，web项目中的服务器端开发任务，Java网络通信的项目等。期间，熟练掌握了并发编程基础知识及web开发技术，是个人技能成长较迅速的两年。</p>
+            </div>
+            <div class="resume-date text-md-right">
+              <span class="text-primary">2013年3 月至2015年4月</span>
+            </div>
+          </div>
+
+          <div class="resume-item d-flex flex-column flex-md-row">
+            <div class="resume-content mr-auto">
+              <div class="subheading mb-3">北京联创智融信息技术有限公司</div>
+              
+              <p>毕业入职的第一家单位，这里的工作经历，让我掌握了软件开发流程、编程规范、缺陷修复等软件开发知识，沉淀了我扎实的编程根基和职业素养。我主要从事Java服务器端代码开发工作，接触过webservice服务，参与过网关通信软件开发。我非常感谢这段工作经历，它让我养成了严谨耐心的编程习惯。</p>
+            </div>
+            <div class="resume-date text-md-right">
+              <span class="text-primary">2011年3月至2013年3月</span>
+            </div>
+          </div>
+
+        </div>
+
+      </section>
+
+      <section class="resume-section p-3 p-lg-5 d-flex flex-column" id="education">
+        <div class="my-auto">
+          <h3 class="mb-5">项目经历</h3>
+
+          <div class="resume-item d-flex flex-column flex-md-row mb-5">
+            <div class="resume-content mr-auto">
+              <h4 class="mb-0">流量探针系统</h4>
+              <div class="subheading mb-3" style="margin-top:10px;">项目简介：</div>
+              
+              <p>采用旁路流量监听原理，将部署产品的设备与入网交换机连接，采集全网流量，并将镜像流量归纳为三类，基于TCP的网络应用流量、基于http协议的应用流量、数据库流量。系统主要提供多维度报表展示、审计报表导出、审计策略管理、系统可用性监控、业务实体化管理等五大功能。</p>
+
+			  <div class="subheading mb-3">工作说明：</div>
+			  <p>作为项目组长，我主要参与系统概要设计、详细设计等工作，指导和分配项目小组成员的开发工作，同时承担项目框架搭建、核心功能的开发和相关shell脚本的编写工作。对项目全局功能进行检查把控，确保项目交付物与需求功能说明书一致。</p>
+
+            </div>
+            <div class="resume-date text-md-right">
+              <span class="text-primary">2016年6月至2018年6月</span>
+            </div>
+          </div>
+
+          <div class="resume-item d-flex flex-column flex-md-row">
+            <div class="resume-content mr-auto">
+              <h4 class="mb-0">分布式画面云显示系统</h4>
+			  <div class="subheading mb-3" style="margin-top:10px;">项目简介：</div>
+              <p>基于Java技术实现的管理端独立显示系统，支持PC，Pad多平台，提供分布式高清视频指挥调度解决方案，可应用于军队，公安，人防，法院，交通等多个行业指挥调度系统</p>
+
+			  <div class="subheading mb-3">工作说明：</div>
+              <p>作为核心开发人员，主要实现组播协议解析，信源管理，画面显示方案下发等功能的实现。协议下发采用多线程，提高大屏多画面渲染的速度。主要难点是对终端通信协议解析，协议的联调测试工作，细致、耐心是解决问题的关键。</p>
+            </div>
+            <div class="resume-date text-md-right">
+              <span class="text-primary">2014年12月至2015年2月</span>
+            </div>
+          </div>
+
+		  <div class="resume-item d-flex flex-column flex-md-row">
+            <div class="resume-content mr-auto">
+              <h4 class="mb-0">广东中山微信公众平台</h4>
+			  <div class="subheading mb-3" style="margin-top:10px;">项目简介：</div>
+              <p>基于Java技术的广东省广播电视网络股份有限公司中山分公司的微信公众平台开发，主要用于分担电话客服的压力，利用微信为广电用户提供更好的服务。</p>
+
+			  <div class="subheading mb-3">工作说明：</div>
+              <p>该项目中，我主要完成微信用户的信息采集，故障上报，催单服务等功能的实现。通过该微信定制服务项目，我掌握了微信公众平台开发的知识，利用微信平台，以达到客服系统的分流目的。</p>
+            </div>
+            <div class="resume-date text-md-right">
+              <span class="text-primary">2014年8月至2014年10月</span>
+            </div>
+          </div>
+        </div>
+
+		<div class="resume-item d-flex flex-column flex-md-row">
+            <div class="resume-content mr-auto">
+              <h4 class="mb-0">EPG电子节目单采集系统</h4>
+			  <div class="subheading mb-3" style="margin-top:10px;">项目简介：</div>
+              <p>基于java网页爬虫电子节目单采集系统，定期采集服务器的电子节目表，查找违规网页并进行违规页面截图，定期上报节目单给总控系统。</p>
+
+			  <div class="subheading mb-3">工作说明：</div>
+              <p>作为核心开发人员，我主要负责实现EPG信息采集及上报功能。对已有老系统的业务逻辑进行优化，使用多线程并发进行数据采集，大大提高了采集效率；对界面变更比对流程进行优化，使用Sql比对替换内存中逐条比对，降低了内存消耗，提供了执行效率。</p>
+
+			  <p>此外，对项目中不合理的代码进行优化处理，重构出EPG采集的开发项目框架。也是我在博汇科技参与时间最久的项目，同类项目的大量重复，让我开始思考稳定代码和公共架构对于提高开发效率的作用。</p>
+            </div>
+            <div class="resume-date text-md-right">
+              <span class="text-primary">2013年3月至2014年2月</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="resume-section p-3 p-lg-5 d-flex flex-column" id="interests">
+        <div class="my-auto">
+          <h3 class="mb-5">兴趣爱好</h3>
+          <p class="mb-0">业余时间常去的是CSDN技术网站，漫书博客，记录个人技术成长轨迹；关注CSDN的问答频道，交流和分享技术知识；定期整理项目开发基础框架，通用API等，充实个人代码库；作为CSDN问答频道热心人，问答技能排名第八，答疑解惑，分享知识。
+          </p>
+          <p class="mb-0">个人博客地址：http://blog.csdn.net/wojiushiwo945you</p>
+		  <p class="mb-0">GitHub开源项目：git@github.com:woodvine/wood_vine_frame.git</p>
+        </div>
+      </section>
+
+      <section class="resume-section p-3 p-lg-5 d-flex flex-column" id="awards">
+        <div class="my-auto">
+          <h3 class="mb-5">证书</h3>
+          <ul class="fa-ul mb-0">
+            <li>
+              <i class="fa-li fa fa-trophy text-warning"></i>
+              英语 6 级</li>
+            <li>
+              <i class="fa-li fa fa-trophy text-warning"></i>
+              信息系统管理工程师</li>
+			 <li>
+              <i class="fa-li fa fa-trophy text-warning"></i>
+              信息系统项目管理师</li> 
+              </div>
+			  <h3 class="mb-5">从业感悟</h3>
+			  <p class="mb-0">路漫漫其修远兮，吾将上下而求索！</p>
+			  <p class="mb-0">IT 路漫漫，我还在路上……</p>
+      </section>
+
+    </div>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Plugin JavaScript -->
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for this template -->
+    <script src="js/resume.min.js"></script>
+
+  </body>
+
+</html>
